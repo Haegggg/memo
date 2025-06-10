@@ -11,28 +11,55 @@
   box-sizing: border-box;
 }
 body {
-  display: flex;
+  /*display: flex;*/
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  background-color: blue;
-  /* background-image: url("/wood.jpg"); */
-  /* background-size: cover; */
+  /*flex-direction: column; 중앙정렬일 경우*/
+  background-color: PaleGreen ;
+  /*background: #0000FF ;
+  background: linear-gradient(
+    180deg, 
+    rgba(0, 0, 255, 1) 0%, 
+    rgba(87, 182, 199, 1) 100%
+  );
+  background-repeat: no-repeat;       /* 반복 끄기 */
+  background-attachment: fixed;       /* 화면에 고정 */
+  /*background-size: cover;             /* 화면 전체를 한 번만 채움 */
   font-family: "BagelFatOne-Regular",serif;
   overflow-x: hidden;
 }
 #space {
   width: 100vw;
-  height: 20vh;
+  height: 10vh;
   position: relative;
 }
+/* 메모들이 들어가는 영역 */
 #container {
-  position: absolute;
-  width: 100vw;
-  padding-bottom: 150px;
-  top: 100vh;
-  overflow-x: visible;
+  position: relative;              /* 자식 절대위치 기준 */
+  margin-left: 0px;              /* 사이드바(110px) 만큼 왼쪽 여백 */
+  width: 100vw;      /* 남은 가로 전체 */
+  height: 100vh;      /* 상단 space(10vh)를 제외한 높이 */
+  /*padding-left: 120px;                   /*  padding: 0px; 안쪽 여백 */
+  box-sizing: border-box;          /* padding 포함 크기 계산 */
+  overflow: visible;              /* 가로 넘침 숨기기 */
 }
+
+
+}
+/* 화면 하단 중앙 고정 타이틀*/
+h1 {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  font-weight: normal;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 99;
+}
+/*
 h1 {
   font-weight: normal;
   font-size: 15px;
@@ -46,23 +73,72 @@ h1 {
   transform: translate(-50%, 0px);
   margin: 10px 0;
 }
+
+/* 1. 사이드바 스타일 */
+#sidebar {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100px;
+  height: 100vh;
+  background: none;
+  padding-top: 0px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 2. 리스트(카테고리) 스타일 */
+#filter-list {
+  list-style: noRoyalBlue ne;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+.sidebar-item {
+  width: 100%;
+  padding: 10px 18px;
+  font-size: 70px;
+  line-height: 0.9;
+  color: #black;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  text-align: left;
+  border-radius: 5px;
+}
+
+/* 3. 마우스오버 효과 */
+.sidebar-item:hover {
+  color: #F0F8FF;
+}
+
 .paper {
   position: absolute;
-  left: 50%;
-  width: 100%;
-  max-width: 800px;
-  min-height: 600px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+  width: 500px;      /* 40vw 화면의 25%로(원하는 비율로 조정) */
+  height: 350px;     /* vh 이 단위는 반응형_화면의 20% (세로도 비슷하게) */
+  min-width: 320px; /* 최소크기 지정 */
+  max-width: 800px; /* 최대크기 지정 */
+  min-height: 400px;
+  max-height: 1000px;
+  border: 1px solid #333333;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   transform-origin: center;
   padding: 25px;
   font-size: 20px;
-  line-height: 1.5;
+  line-height: 1.6;
   overflow: hidden;
   word-wrap: break-word;
   transition: transform 0.2s ease, background 0.2s ease;
+  user-select: none;    /* 모든 텍스트 드래그 방지 */
+  -webkit-user-select: none;  /* 사파리, 크롬용 */
+
 }
+
 .paper:hover {
-  transform: translateX(-50%) scale(1.05);
+  transform: translateX(-50%) scale(1.20);
 }
 .paper.released:hover {
   cursor: pointer;
@@ -72,40 +148,42 @@ h1 {
   position: absolute;
   bottom: 0px;
   left: 52%;
-  padding: 5px;
+  padding: 10px;
   width: 100%;
   font-size: 20px;
   transform: translateX(-50%);
-  background-color: PaleTurquoise;
+  background-color: GhostWhite;
 }
 .releasedPaper {
-  background-color: PaleTurquoise;
+  background-color: GhostWhite;
 }
 .unreleased {
-  color: powderblue;
+  color: GhostWhite;
 }
 .unreleasedPaper {
   pointer-events: none;
-  background-color: PaleTurquoise;
+  background-color: GhostWhite;
 }
 .unreleasedPaper .date-title {
   color: bisque;
 }
+
 .modal {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: PaleTurquoise;
+  background: GhostWhite;
   padding: 20px;
-  box-shadow: 0px 0px 7px SkyBlue;
+  border: 1px solid #333333;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   z-index: 100;
-  width: 92vw;
-  height: 92vh;
+  width: 60vw;
+  height: 80vh;
   line-height: 1.6;
   overflow: hidden;
-  padding-bottom: 60px; /* 타이틀 공간 확보 */
+  padding-bottom: 80px; /* 타이틀 공간 확보 */
 
 }
 .modal-overlay {
@@ -126,10 +204,11 @@ h1 {
 }
 .modal-footer {
   flex: 0 0 auto;
-  padding: 10px 20px;
-  background-color: PaleTurquoise;
+  padding: 10px 25px;
+  background-color: GhostWhite;
   text-align: center;
 }
+
 #modal-title {
   font-size: 23px;
   font-weight: normal;
@@ -138,15 +217,18 @@ h1 {
 
 }
 #modal-text{
-  font-size: 19px !important;
+  font-size: 20px !important;
 }
+
 #modal-date {
   padding-left: 0px;
 }
 
 .credit {
-  bottom: 0;
-  position: absolute;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 9999;
 }
 
@@ -166,8 +248,13 @@ h1 {
 
 @media only screen and (max-width: 600px) {
   #container {
-    top: 50vh;
-  }
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+}
+
   .paper {
     max-width: 300px;
     min-height: 400px;
