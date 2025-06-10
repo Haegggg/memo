@@ -30,7 +30,7 @@ body {
 }
 #space {
   width: 100vw;
-  height: 10vh;
+  height: 1vh;
   position: relative;
 }
 /* 메모들이 들어가는 영역 */
@@ -48,30 +48,16 @@ body {
 }
 /* 화면 하단 중앙 고정 타이틀*/
 h1 {
-  position: fixed;
+  position: absolute;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 15px;
   font-weight: normal;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   text-align: center;
-  z-index: 99;
-}
-/*
-h1 {
-  font-weight: normal;
-  font-size: 15px;
-  margin-top: 50px;
-  left: 50%;
-  max-width: 800px;
-  position: fixed;
-  z-index: 99;
-  bottom: 0;
-  text-align: center;
-  transform: translate(-50%, 0px);
-  margin: 10px 0;
+  z-index: 999;
 }
 
 /* 1. 사이드바 스타일 */
@@ -89,6 +75,7 @@ h1 {
   align-items: flex-start;
 }
 
+
 /* 2. 리스트(카테고리) 스타일 */
 #filter-list {
   list-style: noRoyalBlue ne;
@@ -99,7 +86,7 @@ h1 {
 .sidebar-item {
   width: 100%;
   padding: 10px 18px;
-  font-size: 70px;
+  font-size: 60px;
   line-height: 0.9;
   color: #black;
   background: none;
@@ -115,14 +102,93 @@ h1 {
   color: #F0F8FF;
 }
 
+/* 리스트로 보기 */
+#toggle-view-btn {
+  position: fixed;
+  top: 40px;
+  right: 20px;
+  z-index: 99999;
+  font-size: 20px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  background: #222;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+
+.paper-list-view {
+  list-style: none;
+  margin: 30px auto 30px 265px;
+  width: calc(100vw - 110px);
+  max-width: 1900px;
+  padding: 0;
+  background: none; /* 배경 지정 X */
+}
+
+.paper-list-item {
+  background-color: GhostWhite !important;
+  padding: 12px 20px;
+  border: 1px solid #333333;
+  font-size: 22px;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-sizing: border-box;
+}
+.paper-list-item:hover {
+  background: #dbeeff;
+}
+
+
+@media (max-width: 600px) {
+  #sidebar {
+    width: 44px !important;
+    min-width: 36px !important;
+    max-width: 60px;
+    padding-top: 10px;
+    left: 15px;
+    top: 0;
+  }
+  .sidebar-item {
+    font-size: 30px !important;
+    padding: 8px 0 !important;
+    text-align: center !important;
+    min-width: 36px !important;
+    width: 100% !important;
+  }
+
+  #toggle-view-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    right: 10px;
+    /* 여기에 추가로 top, z-index 등 필요한 속성만 추가하면 됨 */
+    top: 10px;    /* ← 만약 더 위에 두고 싶으면 이렇게 */
+    z-index: 9999; /* ← 더 위에 띄우고 싶으면 이렇게 */
+  }
+
+  .paper-list-view {
+    margin: 20px 2vw 20px 120px !important;  /* ← 모바일에선 margin-left: 44px! */
+    width: calc(100vw - 50px) !important;
+    max-width: 70vw !important;
+    padding: 10px !important;
+  }
+  .paper-list-item {
+    background-color: GhostWhite !important;
+    font-size: 16px !important;
+    padding: 10px 8px !important;
+    box-sizing: border-box;
+  }
+}
+
 .paper {
   position: absolute;
   width: 500px;      /* 40vw 화면의 25%로(원하는 비율로 조정) */
   height: 350px;     /* vh 이 단위는 반응형_화면의 20% (세로도 비슷하게) */
-  min-width: 320px; /* 최소크기 지정 */
+  min-width: 300px; /* 최소크기 지정 */
   max-width: 800px; /* 최대크기 지정 */
-  min-height: 400px;
-  max-height: 1000px;
+  min-height: 300px;
+  max-height: 800px;
   border: 1px solid #333333;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   transform-origin: center;
@@ -198,13 +264,13 @@ h1 {
 .modal-content {
   height: 100%;
   overflow-y: auto;
-  padding: 30px;
+  padding: 10px;
   padding-bottom: 100px; /* 타이틀 가려지지 않게 여유 */
   box-sizing: border-box;
 }
 .modal-footer {
   flex: 0 0 auto;
-  padding: 10px 25px;
+  padding: 10px 10px;
   background-color: GhostWhite;
   text-align: center;
 }
@@ -232,17 +298,23 @@ h1 {
   z-index: 9999;
 }
 
+@media only screen and (max-width: 2500px) {
+  .paper {
+    max-width: 550px;
+    min-height: 600px;
+  }
+}
 @media only screen and (max-width: 1200px) {
   .paper {
-    max-width: 700px;
+    max-width: 480px;
     min-height: 600px;
   }
 }
 
 @media only screen and (max-width: 900px) {
   .paper {
-    max-width: 500px;
-    min-height: 600px;
+    max-width: 400px;
+    min-height: 520px;
   }
 }
 
@@ -250,18 +322,18 @@ h1 {
   #container {
   position: absolute;
   width: 100vw;
-  height: 100vh;
-  left: 0;
-  top: 0;
+  height: 200vh;
+  left: 30;
+  top: 30;
 }
 
   .paper {
-    max-width: 300px;
+    max-width: 350px;
     min-height: 400px;
     height: 400px;
   }
   .modal {
     width: 85vw;
-    height: 75vh;
+    height: 45vh;
   }
 }

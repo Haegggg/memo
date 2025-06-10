@@ -19,16 +19,18 @@
 <div id="sidebar">
   <ul id="filter-list">
     <li onclick="showAll()" class="sidebar-item">All</li>
-    <li onclick="filterByCategory('작업')" class="sidebar-item">Book</li>
-    <li onclick="filterByCategory('생각')" class="sidebar-item">Media</li>
-    <li onclick="filterByCategory('리뷰')" class="sidebar-item">Tea</li>
-    <li onclick="filterByCategory('시도')" class="sidebar-item">Recipe</li>
+    <li onclick="filterByCategory('Book')" class="sidebar-item">Book</li>
+    <li onclick="filterByCategory('Media')" class="sidebar-item">Media</li>
+    <li onclick="filterByCategory('Tea')" class="sidebar-item">Tea</li>
+    <li onclick="filterByCategory('Recipe')" class="sidebar-item">Recipe</li>
   </ul>
 </div>
 
 
     <!-- 메모 더미의 컨테이너 -->
     <div id="container"></div>
+    <button id="toggle-view-btn">List</button>
+    
     <h1>All the Things I’ve Tried</h1>
 
     <!-- 각 메모를 클릭했을 때 열리는 창 -->
@@ -43,8 +45,6 @@
     <h3 id="modal-title">타이틀</h3>
   </div>
 </div>
-
-
 
 
     <script src="paper.js"></script>

@@ -1,6 +1,37 @@
+//권장 코드 순서
+//1.데이터 선언 (const papers = ...)
+//2.상태 변수 선언 (let dragging ...)
+//3.addListView, addPapers 등 함수 선언
+//4.이벤트 등록들 (addEventListener, interact 등)
+//5.window.onload = ...
+
+
 let dragging = false;
 let dragJustFinished = false;
-let currentOpenPaper = null;
+let currentOpenPaper = null; //모달 관련
+let isListView = false; //리스트 뷰 여부
+let currentPapers = papers; // 화면에 보이는 메모 목록 기억하는 변수
+
+//리스트로 보는 기능
+function addListView(paperList = currentPapers) {
+  const container = document.getElementById("container");
+  container.innerHTML = "";
+
+  const list = document.createElement("ul");
+  list.className = "paper-list-view";
+
+  paperList.forEach((entry) => {
+    const item = document.createElement("li");
+    item.className = "paper-list-item";
+    item.innerText = entry.title;
+    item.addEventListener("click", () => {
+      openModal(entry.date, entry.title, entry.text.replace(/\n/g, "<br>"));
+    });
+    list.appendChild(item);
+  });
+
+  container.appendChild(list);
+}
 
 function addPapers(paperList = papers) {
   const container = document.getElementById("container");
@@ -8,17 +39,17 @@ function addPapers(paperList = papers) {
 
   const isMobile = window.innerWidth <= 600;
 
+
 // 1. tempPaper를 body에 붙여서 실제 크기 측정
   const tempPaper = document.createElement('div');
   tempPaper.className = 'paper';
   tempPaper.style.visibility = 'hidden';
   tempPaper.style.position = 'absolute';
   tempPaper.innerHTML = `<div class="dateAndtitle">테스트</div><p>테스트</p>`;
-  container.appendChild(tempPaper); // 반드시 container에 붙여!
+  container.appendChild(tempPaper);
   const paperWidth = tempPaper.offsetWidth;
   const paperHeight = tempPaper.offsetHeight;
   container.removeChild(tempPaper);
-
 
 // 2. container 기준 랜덤 좌표 범위
   //const sidebarWidth = 110; // ← 실제 sidebar의 width
@@ -26,10 +57,10 @@ const minX = 0;
 const minY = 0;
 const maxX = container.offsetWidth - paperWidth;
 const maxY = container.offsetHeight - paperHeight;
+
 //각 메모 생성 때 
 const randX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
 const randY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
-
 
 
 // 3. forEach로 메모 반복 생성
@@ -37,8 +68,7 @@ const randY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
     const paper = document.createElement("div");
     paper.classList.add("paper");
 
-// 각도 랜덤
-    // 랜덤 각도 (ex: -15도~15도)
+// 각도 랜덤(ex: -15도~15도)
     const randomRotation = (Math.random() * 30 - 15).toFixed(2);
     paper.dataset.rotate = randomRotation;
     paper.style.transform = `rotate(${randomRotation}deg)`;
@@ -75,6 +105,7 @@ const randY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
         currentOpenPaper = clickedKey;
       }
     });
+
 // 마우스 오버 효과 parsFloat가 각도. 모바일과 데스크톱 순
   paper.addEventListener("mouseover", () => {
   if (dragging) return;
@@ -93,11 +124,20 @@ paper.addEventListener("mouseleave", () => {
   });
 }
 
-
+function filterByCategory(category) {
+  isListView = false;
+  document.getElementById("toggle-view-btn").innerText = "List";
+  currentPapers = papers.filter(p => p.category === category);
+  addPapers(currentPapers);
+}
 
 function showAll() {
-  addPapers(papers);
+  isListView = false;
+  document.getElementById("toggle-view-btn").innerText = "List";
+  currentPapers = papers;
+  addPapers(currentPapers);
 }
+
 function openModal(date, title, text) {
   document.getElementById("modal-date").innerText = date;
   document.getElementById("modal-title").innerText = title;
@@ -111,10 +151,8 @@ function closeModal() {
   document.getElementById("modal").style.display = "none";
   currentOpenPaper = null;
 }
-function filterByCategory(category) {
-  const filtered = papers.filter(p => p.category === category);
-  addPapers(filtered);
-}
+
+
 
 //마우스로 메모 드래그
 interact('.paper').draggable({
@@ -142,9 +180,14 @@ interact('.paper').draggable({
 });
 
 
+// 리스트 분류 버튼
+document.getElementById("toggle-view-btn").addEventListener("click", function() {
+  isListView = true;
+  addListView(currentPapers);
+});
+
 //모달 클릭시 닫기 추가
 document.getElementById("modal").addEventListener("click", closeModal);
-
 
 // 배경 클릭 시 닫기
 document.getElementById("modal-overlay").addEventListener("click", closeModal);
