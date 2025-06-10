@@ -157,6 +157,7 @@ function closeModal() {
 //마우스로 메모 드래그
 interact('.paper').draggable({
   inertia: false,
+  manualStart: false,      // 명시적으로 false!
   listeners: {
     start(event) {
       dragging = true;
