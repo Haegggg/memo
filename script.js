@@ -23,7 +23,7 @@ function addListView(paperList = currentPapers) {
   paperList.forEach((entry) => {
     const item = document.createElement("li");
     item.className = "paper-list-item";
-    item.innerText = entry.title;
+    item.innerHTML = `<span class="auto-box"><span class="list-date">${entry.date}</span><span class="list-title">${entry.title}</span></span>`;
     item.addEventListener("click", () => {
       openModal(entry.date, entry.title, entry.text.replace(/\n/g, "<br>"));
     });

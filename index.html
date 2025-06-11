@@ -10,6 +10,9 @@
     <meta property="og:description" content="memodummy/blank.html" />
     <title>memodummy/blank.html</title>
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
   </head>
   <body>
@@ -19,10 +22,12 @@
 <div id="sidebar">
   <ul id="filter-list">
     <li onclick="showAll()" class="sidebar-item">All</li>
-    <li onclick="filterByCategory('Book')" class="sidebar-item">Book</li>
-    <li onclick="filterByCategory('Media')" class="sidebar-item">Media</li>
-    <li onclick="filterByCategory('Tea')" class="sidebar-item">Tea</li>
-    <li onclick="filterByCategory('Recipe')" class="sidebar-item">Recipe</li>
+    <li onclick="filterByCategory('Book')" class="sidebar-item">Books</li>
+    <li onclick="filterByCategory('Tea')" class="sidebar-item">Teas</li>
+    <li onclick="filterByCategory('Cook')" class="sidebar-item">Dishes</li>
+    <li onclick="filterByCategory('Drama')" class="sidebar-item">Dramas</li>
+    <li onclick="filterByCategory('Others')" class="sidebar-item">Others</li>
+
   </ul>
 </div>
 
@@ -33,7 +38,7 @@
 
 
     
-    <h1>All the Things I’ve Tried</h1>
+    <h1>All the Things I Like</h1>
 
     <!-- 각 메모를 클릭했을 때 열리는 창 -->
     <div class="modal-overlay" id="modal-overlay"></div>

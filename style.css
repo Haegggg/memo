@@ -5,6 +5,7 @@
     font-style: normal;
 }
 
+
 * {
   margin: 0;
   padding: 0;
@@ -120,24 +121,39 @@ h1 {
 
 .paper-list-view {
   list-style: none;
-  margin: 30px auto 30px 265px;
+  margin: 30px auto 30px 280px;
   width: calc(100vw - 110px);
-  max-width: 1900px;
+  max-width: 1900vw;
   padding: 0;
+  gap: 20px;
   background: none; /* 배경 지정 X */
+}
+.list-date {
+  display: inline-block;
+  min-width: 90px;
+  margin-right: 20px;
+  color: black;
 }
 
 .paper-list-item {
+  display: inline-block; 
   background-color: GhostWhite !important;
-  padding: 12px 20px;
+  padding: 15px 20px;
   border: 1px solid #333333;
   font-size: 22px;
   cursor: pointer;
   transition: background 0.2s;
   box-sizing: border-box;
+  border-radius: 32px;  /* 또는 24px, 50px(더 둥글게 원하면) */
+  margin: 4px 4px;
+  min-width: 2px; 
+  white-space: nowrap;
 }
+
 .paper-list-item:hover {
-  background: #dbeeff;
+  background: #FFC0CB !important; 
+  color: black ;          
+  border-color: black;
 }
 
 
@@ -168,7 +184,7 @@ h1 {
   }
 
   .paper-list-view {
-    margin: 20px 2vw 20px 120px !important;  /* ← 모바일에선 margin-left: 44px! */
+    margin: 20px 2vw 20px 130px !important;  /* ← 모바일에선 margin-left: 44px! */
     width: calc(100vw - 50px) !important;
     max-width: 70vw !important;
     padding: 10px !important;
@@ -193,7 +209,9 @@ h1 {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   transform-origin: center;
   padding: 25px;
-  font-size: 20px;
+  font-family: "Gothic A1", sans-serif;
+  font-size: 18px;
+  font-weight: 900;
   line-height: 1.6;
   overflow: hidden;
   word-wrap: break-word;
@@ -201,8 +219,6 @@ h1 {
   user-select: none;    /* 모든 텍스트 드래그 방지 */
   -webkit-user-select: none;  /* 사파리, 크롬용 */
   touch-action: none; /* ← 이거 반드시 추가! */
-
-
 }
 
 .paper:hover {
@@ -218,7 +234,9 @@ h1 {
   left: 52%;
   padding: 10px;
   width: 100%;
-  font-size: 20px;
+  font-family: "BagelFatOne-Regular", sans-serif;
+  font-weight: Regular;
+  font-size: 21px;
   transform: translateX(-50%);
   background-color: GhostWhite;
 }
@@ -281,15 +299,18 @@ h1 {
   font-size: 23px;
   font-weight: normal;
   position: fixed;
-  
 
+  
 }
 #modal-text{
   font-size: 20px !important;
+  font-family: "Gothic A1", sans-serif;
+  font-weight: 900;
 }
 
 #modal-date {
-  padding-left: 0px;
+  padding-bottom: 10px;
+  font-size: 23px;
 }
 
 .credit {
